@@ -1,13 +1,23 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
+    <div id="nav" v-if="!home">
+      <router-link to="/">Dashboard</router-link>
     </div>
-    <router-view/>
+    <b-container fluid id="body">
+      <router-view />
+    </b-container>
   </div>
 </template>
-
+<script>
+export default {
+  name: "App",
+  computed: {
+    home() {
+      return this.$route.path === "/";
+    },
+  },
+};
+</script>
 <style>
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
@@ -16,7 +26,6 @@
   text-align: center;
   color: #2c3e50;
 }
-
 #nav {
   padding: 30px;
 }
@@ -28,5 +37,8 @@
 
 #nav a.router-link-exact-active {
   color: #42b983;
+}
+#body {
+  margin-top: 2rem;
 }
 </style>
