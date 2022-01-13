@@ -30,7 +30,7 @@ app.use("/", express.static(path.resolve(__dirname, "..", "build")));
 app.get("/groups", async (req, res, next) => {
   try {
     // db query for all groups, returning only the id and name columns
-    const groups = await Group.findAll({ attributes: ["id", "name"] })
+    const groups = await Group.findAll({ attributes: ["id", "name"] });
     // all requests must eventually call one of the following:
     // 1. res.json(obj) - serializes obj to JSON (with toJSON() if necessary) and return it in the response body
     // 2. res.send() - return an empty response body
@@ -52,6 +52,8 @@ app.get("/groups/:groupId/users", async (req, res, next) => {
       return;
     }
     const users = await group.getUsers(); // database query for all Users in the Group
+    res.status(404);
+    res.send();
     res.json(users);
   } catch (error) {
     next(error);
