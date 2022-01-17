@@ -52,8 +52,6 @@ app.get("/groups/:groupId/users", async (req, res, next) => {
       return;
     }
     const users = await group.getUsers(); // database query for all Users in the Group
-    res.status(404);
-    res.send();
     res.json(users);
   } catch (error) {
     next(error);
