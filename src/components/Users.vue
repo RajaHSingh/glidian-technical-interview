@@ -31,7 +31,7 @@
             variant="danger"
             style="min-width: 75px"
             size="sm"
-            @click="Delete(row.item.id)"
+            @click="deleteUser(row.item.id)"
             >Delete</b-button
           >
         </template>
@@ -73,6 +73,7 @@
   </b-container>
 </template>
 <script>
+import { deleteUser } from "../modules/api";
 export default {
   name: "Users",
   props: {
@@ -124,8 +125,14 @@ export default {
       // TODO: edit user
     },
     // eslint-disable-next-line no-unused-vars
-    delete(_userId) {
-      // TODO: delete user, using _userId
+    async deleteUser(_userId) {
+      const response = await deleteUser(_userId);
+      if (response.error) {
+        this.$emit("error", response.error);
+      }
+      if (response.status === 200) {
+        this.$emit("updateUsers");
+      }
     },
     // eslint-disable-next-line no-unused-vars
     addUser() {

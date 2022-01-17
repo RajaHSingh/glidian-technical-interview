@@ -58,6 +58,32 @@ app.get("/groups/:groupId/users", async (req, res, next) => {
   }
 });
 
+app.delete("/user", async (req, res, next) => {
+  if (!req.body || !req.body.id) {
+    res.status(400);
+    res.send();
+    return;
+  }
+  const user = await User.findByPk(req.body.id).catch((error) => {
+    next(error);
+  });
+  if (!user) {
+    console.error(`User not found for userId: ${req.body.id}`);
+    res.status(404);
+    res.send();
+    return;
+  }
+  if (user) {
+    await User.destroy({
+      where: {
+        id: req.body.id,
+      },
+    });
+  }
+  res.status(200);
+  res.send();
+  return;
+});
 /****************************
  * END ENDPOINT DEFINITIONS *
  ****************************/

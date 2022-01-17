@@ -10,12 +10,12 @@ const httpClient = axios.create({
 
 async function apiAction(action, path, params = null) {
   let response = {};
-  let data = null;
+  let body = null;
   if (params) {
     if (typeof data === "object") {
-      data = { ...params };
+      body = { ...params };
     } else {
-      data = params;
+      body = params;
     }
   }
   try {
@@ -24,13 +24,13 @@ async function apiAction(action, path, params = null) {
         response = await httpClient.get(path);
         break;
       case "post":
-        response = await httpClient.post(path, data);
+        response = await httpClient.post(path, { data: body });
         break;
       case "put":
-        response = await httpClient.put(path, data);
+        response = await httpClient.put(path, { data: body });
         break;
       case "delete":
-        response = await httpClient.delete(path, data);
+        response = await httpClient.delete(path, { data: body });
         break;
     }
   } catch (error) {
@@ -61,7 +61,7 @@ const getListgroups = () => api.get("/groups");
 const getGroupOfUsers = (groupId) => api.get(`/groups/${groupId}/users`);
 const createUser = (params) => api.post("/user", params);
 const updateUser = (params) => api.put("/user", params);
-const deleteUser = (id) => api.delete("/user", { id });
+const deleteUser = (_id) => api.delete("/user", { id: _id });
 
 const getGroup = (params) => api.get("/group", params);
 const createGroup = (params) => api.put("/group", params);

@@ -14,7 +14,12 @@
         />
       </b-col>
     </b-row>
-    <users v-if="users.length > 0" :users="users" />
+    <users
+      v-if="users.length > 0"
+      :users="users"
+      @error="updateError"
+      @updateUsers="getUsers"
+    />
   </div>
 </template>
 <script>
@@ -58,6 +63,9 @@ export default {
       if (response.error) {
         this.error = response.error;
       }
+    },
+    updateError(error) {
+      this.error = error;
     },
   },
 };
