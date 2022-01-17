@@ -5,7 +5,7 @@
   "scripts": {
     "start": "echo Please use \\'npm run start:frontend\\' or \\'npm run start:backend\\'",
     "start:backend": "nodemon --unhandled-rejections=strict backend",
-    "start:frontend": "vue-cli-service serve",
+    "start:frontend": "vue-cli-service serve --port 3000",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint"
   },

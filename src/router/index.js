@@ -1,19 +1,14 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-import PassengerList from "../views/PassengerList.vue";
+import UserList from "../views/UserList.vue";
 
 Vue.use(VueRouter);
 
 const routes = [
   {
     path: "/",
-    name: "PassengerList",
-    component: PassengerList,
-  },
-  {
-    path: "/about",
-    name: "User",
-    component: () => import("../views/About.vue"),
+    name: "UserList",
+    component: UserList,
   },
 ];
 
