@@ -1,3 +1,5 @@
+The original UI was written in React, I ripped that out and wrote the UI in Vue
+
 # glidian
 
 ## Project setup
